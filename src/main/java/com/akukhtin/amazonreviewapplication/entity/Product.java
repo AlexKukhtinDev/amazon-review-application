@@ -2,6 +2,9 @@ package com.akukhtin.amazonreviewapplication.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -17,8 +20,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-@Builder
-public class Product extends BaseEntity {
+public class Product {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
   @Column(name = "product_id")
   private String productId;
   @Column(name = "helpfulness_denominator")
@@ -31,4 +36,13 @@ public class Product extends BaseEntity {
   private Long score;
   @Column(name = "summary")
   private String summary;
+
+  public Product(String productId, Long helpfulnessDenominator, Long helpfulnessNominator,
+                 @Min(0) @Max(5) Long score, String summary) {
+    this.productId = productId;
+    this.helpfulnessDenominator = helpfulnessDenominator;
+    this.helpfulnessNominator = helpfulnessNominator;
+    this.score = score;
+    this.summary = summary;
+  }
 }
