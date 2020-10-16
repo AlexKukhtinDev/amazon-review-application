@@ -1,10 +1,15 @@
 package com.akukhtin.amazonreviewapplication.entity;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -35,6 +40,9 @@ public class Product {
   private Long score;
   @Column(name = "summary")
   private String summary;
+  @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @JoinColumn(name = "id",insertable = false, updatable = false)
+  private List<Comment> comment;
 
   public Product(String productId, Long helpfulnessDenominator, Long helpfulnessNominator,
                  @Min(0) @Max(5) Long score, String summary) {

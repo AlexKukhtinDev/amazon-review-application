@@ -12,16 +12,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "USER")
-@NoArgsConstructor
+@Table(name = "USERS")
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
-  private Long id;
+  private String id;
   @Column(name = "user_id")
   private String userId;
   @Column(name = "profile_name")
@@ -31,4 +31,5 @@ public class User {
     this.userId = userId;
     this.profileName = profileName;
   }
+
 }

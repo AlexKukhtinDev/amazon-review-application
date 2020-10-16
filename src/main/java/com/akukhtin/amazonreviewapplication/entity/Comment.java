@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,6 +25,9 @@ public class Comment {
   private Long id;
   @Column(name = "text", length = 100000)
   private String text;
+  @ManyToOne
+  @JoinColumn(name = "id",insertable = false, updatable = false)
+  private Product product;
 
   public Comment(String text) {
     this.text = text;
